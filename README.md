@@ -27,7 +27,7 @@ cmsenv
 scram b -j 9
 
 # Install Flashgg Final Fit packages
-git clone -b dev_fggfinalfits_lite git@github.com:chuwang1/flashggFinalFit.git
+git clone -b FHWW git@github.com:PeiranLi001/flashggFinalFit-1.git
 cd flashggFinalFit/
 ```
 
@@ -37,23 +37,42 @@ cmsenv
 source setup.sh
 ```
 
-## simple test
-There is a automactic script.Named testRun.sh
+## SingleH setup
+There is a automactic script.Named SLSingleH.sh
 Before you run it.
 You should set:
-- node="cHHH1"
-- procs='GluGluToHHTo2G4Q'
-- year='2017'
-- cat='HHWWggTag_1'
-- doHHWWgg='True'
-- TreePath='P/eos/user/a/atishelm/ntuples/HHWWgg_flashgg/January_2021_Production/2017/Signal/FH_NLO_2017_hadded/' #path to signal tree
-- DataTreeFile='/eos/user/a/atishelm/ntuples/HHWWgg_flashgg/January_2021_Production/2017/Data_Trees/Data_2017.root' #path to data tree file
+- Names=("SingleHiggs_ttHJetToGG_2018_1_CategorizedTrees" "SingleHiggs_VHToGG_2018_1_CategorizedTrees" "SingleHiggs_VBFHToGG_2018_1_CategorizedTrees" "SingleHiggs_GluGluHToGG_2018_1_CategorizedTrees") #depend on your file name SingleHiggs_ttHJetToGG_2018_1_CategorizedTrees.root
+- years=("2018")
+- cat='HHWWggTag_FHDNN_0,HHWWggTag_FHDNN_1,HHWWggTag_FHDNN_2,HHWWggTag_FHDNN_3'
+- TreePath="/eos/user/l/lipe/DNN_Evaluation_sample/${year}/CategorizeRootFileCondor_21Apr_WithCuts/" #path to signal tree
+- InputWorkspace="/eos/user/l/lipe/HHWWggWorkspace/FHDNN/" #provide a path to save workspace
 - doSelections="0" #if you want to applied selections to your tree, then set it to 1
 - Selections='dipho_pt > 160' #Here you can define which selections you want to set.
 
 After you set these options,Then you can just run:
 ```
-sh testRun.sh
+sh SLSingleH.sh
+```
+## run signal to compute the limit
+There is a automactic script.Named FH.sh
+Before you run it.
+You should set:
+- nodes=("cHHH1" "cHHH2p45" "cHHH5")
+- years=("2016" "2017" "2018")
+- procs='GluGluToHHTo2G4Q' # for ZZ, it is 'GluGluToHHTo2G2ZTo2G4Q'
+- InputTreeCats='HHWWggTag_FH_0,HHWWggTag_FH_1,HHWWggTag_FH_2,HHWWggTag_FH_3' #input cat name in the Signal tree
+- InputDataTreeCats='HHWWggTag_FH_0,HHWWggTag_FH_1,HHWWggTag_FH_2,HHWWggTag_FH_3' #input cat name in the Data tree
+- SignalTreeFile="/eos/user/l/lipe/DNN_Evaluation_sample/${year}/CategorizeRootFileCondor_21Apr_WithCuts/Signal_${procs}_${node}_${year}_1_CategorizedTrees.root"
+- DataTreeFile="/eos/user/l/lipe/DNN_Evaluation_sample/${year}/CategorizeRootFileCondor_21Apr_WithCuts/Data_${year}_CategorizedTrees.root"
+- InputWorkspace="/eos/user/l/lipe/HHWWggWorkspace/FHDNN/" #provide a path to save workspace
+- doSelections="0" #if you want to applied selections to your tree, then set it to 1
+- Selections='dipho_pt > 160' #Here you can define which selections you want to set.
+
+Also check the xs and br on the bottom lines.
+
+After you set these options,Then you can just run:
+```
+sh FH.sh
 ```
 
 
