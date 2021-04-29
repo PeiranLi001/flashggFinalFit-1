@@ -18,7 +18,7 @@ do
     cat='HHWWggTag_FHDNN_0,HHWWggTag_FHDNN_1,HHWWggTag_FHDNN_2,HHWWggTag_FHDNN_3' #Final cat name 
     
     # SignalTreeFile="/eos/user/a/atishelm/ntuples/HHWWgg_flashgg/January_2021_Production/2016/FH_DNN_Categorized_LOSignals_noPtOverM-Training/Signal_${node}_2016_all_CategorizedTrees.root"
-    SignalTreeFile="/eos/user/l/lipe/DNN_Evaluation_sample/${year}/CategorizeRootFileCondor_21Apr_WithCuts/Signal_GluGluToHHTo2G2ZTo2G4Q_${node}_${year}_1_CategorizedTrees.root"
+    SignalTreeFile="/eos/user/l/lipe/DNN_Evaluation_sample/${year}/CategorizeRootFileCondor_21Apr_WithCuts/Signal_${procs}_${node}_${year}_1_CategorizedTrees.root"
     DataTreeFile="/eos/user/l/lipe/DNN_Evaluation_sample/${year}/CategorizeRootFileCondor_21Apr_WithCuts/Data_${year}_CategorizedTrees.root"
     InputWorkspace="/eos/user/l/lipe/HHWWggWorkspace/FHDNN/" 
 
